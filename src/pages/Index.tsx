@@ -45,15 +45,7 @@ const Index = () => {
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center px-4">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1 }}
-          className="glassmorphic-initials absolute text-[20rem] font-bold opacity-10 pointer-events-none select-none"
-          style={{ zIndex: 0 }}
-        >
-          DI
-        </motion.div>
+        {/* background initials removed per request */}
 
         <div className="relative z-10 text-center max-w-4xl mx-auto">
           <motion.h1
