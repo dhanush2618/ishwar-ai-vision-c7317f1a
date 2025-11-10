@@ -5,48 +5,62 @@ import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import CursorTrail from "@/components/CursorTrail";
+import NeonBackground from "@/components/NeonBackground";
 import projectsIcon from "@/assets/projects-icon.jpg";
+import ganMedical from "@/assets/placeholders/dark/gan-medical.svg";
+import strokePrediction from "@/assets/placeholders/dark/stroke-prediction.svg";
+import bookReco from "@/assets/placeholders/dark/book-reco.svg";
+import imdbSentiment from "@/assets/placeholders/dark/imdb-sentiment.svg";
+import churnModel from "@/assets/placeholders/dark/churn-model.svg";
+import resumeNlp from "@/assets/placeholders/dark/resume-nlp.svg";
 
 const Projects = () => {
   const projects = [
     {
       title: "GAN-Based Synthetic Data Augmentation for Rare Disease Imaging",
       description: "Built custom GAN models to generate synthetic MRI images for underrepresented diseases, addressing critical data scarcity in medical AI research.",
-      tech: ["GANs", "TensorFlow", "Medical Imaging"]
+      tech: ["GANs", "TensorFlow", "Medical Imaging"],
+      image: ganMedical
     },
     {
       title: "Machine Learning-Based Stroke Prediction Model",
       description: "Developed a predictive healthcare model using medical and demographic data to identify high-risk patients for early intervention.",
-      tech: ["Machine Learning", "Healthcare", "Python"]
+      tech: ["Machine Learning", "Healthcare", "Python"],
+      image: strokePrediction
     },
     {
       title: "Semantic-Aware Book Recommendation Framework",
       description: "Designed an AI-based recommendation system using semantic embeddings and natural language processing for personalized book suggestions.",
-      tech: ["NLP", "Recommendation System", "Embeddings"]
+      tech: ["NLP", "Recommendation System", "Embeddings"],
+      image: bookReco
     },
     {
       title: "Sentiment Modeling of IMDB Reviews",
       description: "Built deep learning models (LSTMs, TF-IDF) for sentiment classification achieving high accuracy on large-scale movie review datasets.",
-      tech: ["LSTM", "NLP", "TF-IDF"]
+      tech: ["LSTM", "NLP", "TF-IDF"],
+      image: imdbSentiment
     },
     {
       title: "Predictive Modeling of Customer Churn",
       description: "Used Logistic Regression, XGBoost, and SHAP analysis to identify key retention drivers and predict customer churn behavior.",
-      tech: ["XGBoost", "SHAP", "Analytics"]
+      tech: ["XGBoost", "SHAP", "Analytics"],
+      image: churnModel
     },
     {
       title: "Resume Evaluation using NLP",
       description: "Created an automated resume screening system using natural language processing to match candidates with job requirements.",
-      tech: ["NLP", "Text Analysis", "Automation"]
+      tech: ["NLP", "Text Analysis", "Automation"],
+      image: resumeNlp
     }
   ];
 
   return (
     <div className="min-h-screen bg-background text-foreground relative">
+      <NeonBackground />
       <CursorTrail />
       <Navigation />
       
-      <div className="container mx-auto px-4 py-24">
+  <div className="container mx-auto px-4 py-24 page-safe-top">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -83,6 +97,9 @@ const Projects = () => {
             >
               <Card className="glass-card hover:glow-border h-full border-2 transition-all duration-300">
                 <CardHeader>
+                  <div className="mb-4 rounded-md overflow-hidden h-36 w-full ring-2 ring-secondary/40">
+                    <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
+                  </div>
                   <CardTitle className="text-xl gradient-text">
                     {project.title}
                   </CardTitle>

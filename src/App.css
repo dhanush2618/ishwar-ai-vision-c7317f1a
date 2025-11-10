@@ -1,3 +1,19 @@
+/* Aesthetic page header treatment and sticky spacing to avoid overlap */
+.page-header-wrap {
+  position: relative;
+}
+.page-header-wrap .page-title {
+  text-shadow: 0 2px 12px rgba(99,102,241,0.35), 0 0 24px rgba(6,182,212,0.25);
+}
+.page-safe-top {
+  padding-top: clamp(5.5rem, 9vw, 7.5rem);
+}
+.sticky-guard {
+  position: sticky;
+  top: 0;
+  height: 0;
+  z-index: 0;
+}
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -39,4 +55,45 @@
 
 .read-the-docs {
   color: #888;
+}
+
+/* slow spin for abstract avatar */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spin-slow 18s linear infinite;
+}
+
+/* electrifying hero arcs */
+@keyframes electric-dash {
+  to { stroke-dashoffset: -200; }
+}
+.electric-path {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 10 14;
+  animation: electric-dash 3.2s linear infinite;
+  opacity: 0.75;
+}
+@media (max-width: 640px) {
+  .electric-path { opacity: 0.45; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .electric-path { animation: none; }
+  .animate-spin-slow { animation: none; }
+  .pulse-ring { animation: none; }
+}
+
+/* pulsing ring behind hero name */
+@keyframes pulse-ring {
+  0%, 100% { transform: scale(0.92); opacity: 0.35; }
+  50% { transform: scale(1.05); opacity: 0.65; }
+}
+.pulse-ring {
+  background: radial-gradient(circle at 50% 50%, rgba(34,211,238,0.55), rgba(99,102,241,0.35), transparent 70%);
+  filter: blur(12px);
+  animation: pulse-ring 4.5s ease-in-out infinite;
+  pointer-events: none;
 }

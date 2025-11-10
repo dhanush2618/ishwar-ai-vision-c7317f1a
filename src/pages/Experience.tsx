@@ -5,7 +5,10 @@ import { ArrowLeft, Calendar } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import CursorTrail from "@/components/CursorTrail";
+import NeonBackground from "@/components/NeonBackground";
 import experienceIcon from "@/assets/experience-icon.jpg";
+import nitGan from "@/assets/placeholders/dark/nit-gan.svg";
+import hyundaiImg from "@/assets/placeholders/dark/hyundai.svg";
 
 const Experience = () => {
   const experiences = [
@@ -14,6 +17,7 @@ const Experience = () => {
       role: "Research Intern",
       period: "June 2025 - July 2025",
       description: "Researched Generative Adversarial Networks (GANs) for creating synthetic medical images of rare diseases, contributing to medical AI advancement.",
+  image: nitGan,
       highlights: [
         "Developed custom GAN architectures for medical image synthesis",
         "Collaborated with medical professionals to validate synthetic data",
@@ -25,6 +29,7 @@ const Experience = () => {
       role: "Intern",
       period: "February 2024",
       description: "Applied AI/ML for predictive maintenance and cloud-integrated automotive operations, enhancing operational efficiency.",
+  image: hyundaiImg,
       highlights: [
         "Implemented predictive maintenance models",
         "Integrated cloud-based AI solutions",
@@ -33,12 +38,15 @@ const Experience = () => {
     }
   ];
 
+  const cleanPeriod = (p: string) => p.replace(/[0-9]/g, "").replace(/\s+–\s+|\s+-\s+/, " – ").replace(/\s{2,}/g, " ").trim();
+
   return (
     <div className="min-h-screen bg-background text-foreground relative">
+      <NeonBackground />
       <CursorTrail />
       <Navigation />
       
-      <div className="container mx-auto px-4 py-24">
+  <div className="container mx-auto px-4 py-24 page-safe-top">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -55,7 +63,7 @@ const Experience = () => {
           <div className="mb-8 rounded-lg overflow-hidden max-w-3xl mx-auto">
             <img src={experienceIcon} alt="Experience" className="w-full h-48 object-cover opacity-80" />
           </div>
-          <h1 className="text-5xl md:text-6xl font-bold mb-4 gradient-text text-center">
+          <h1 className="text-5xl md:text-6xl font-bold mb-4 gradient-text text-center page-title">
             Experience
           </h1>
           <p className="text-xl text-muted-foreground mb-8 text-center max-w-3xl mx-auto">
@@ -63,38 +71,37 @@ const Experience = () => {
           </p>
         </motion.div>
 
-        <div className="max-w-5xl mx-auto space-y-8">
+  <div className="grid lg:grid-cols-1 gap-8 max-w-5xl mx-auto">
           {experiences.map((exp, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
+              transition={{ duration: 0.6, delay: index * 0.15 }}
             >
-              <Card className="glass-card hover:glow-border border-2 transition-all duration-300">
+              <Card className="glass-card hover:glow-border border-2 transition-all duration-300 h-full">
                 <CardHeader>
-                  <div className="flex items-start justify-between flex-wrap gap-4">
+                  <div className="flex items-start justify-between gap-3">
                     <div>
-                      <CardTitle className="text-2xl gradient-text mb-2">
-                        {exp.organization}
-                      </CardTitle>
-                      <p className="text-lg text-secondary font-semibold">{exp.role}</p>
+                      <CardTitle className="text-lg gradient-text mb-1">{exp.organization}</CardTitle>
+                      <p className="text-sm text-secondary font-semibold">{exp.role}</p>
                     </div>
-                    <div className="flex items-center gap-2 px-4 py-2 glass-card rounded-full">
-                      <Calendar className="w-4 h-4 text-gold" />
-                      <span className="text-sm text-gold">{exp.period}</span>
+                    <div className="flex items-center gap-2 px-3 py-1 glass-card rounded-full">
+                      <Calendar className="w-3 h-3 text-gold" />
+                      <span className="text-xs text-gold">{cleanPeriod(exp.period)}</span>
                     </div>
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground mb-4 leading-relaxed">
-                    {exp.description}
-                  </p>
+                  <div className="mb-4 rounded-md overflow-hidden h-56 w-full ring-2 ring-secondary/30">
+                    <img src={exp.image} alt={exp.organization} className="w-full h-full object-cover" />
+                  </div>
+                  <p className="text-sm text-muted-foreground mb-4 leading-relaxed">{exp.description}</p>
                   <ul className="space-y-2">
                     {exp.highlights.map((highlight, hIndex) => (
-                      <li key={hIndex} className="flex items-start gap-2">
-                        <span className="text-primary mt-1">•</span>
+                      <li key={hIndex} className="flex items-start gap-3">
+                        <span className="text-primary">•</span>
                         <span className="text-sm text-muted-foreground">{highlight}</span>
                       </li>
                     ))}

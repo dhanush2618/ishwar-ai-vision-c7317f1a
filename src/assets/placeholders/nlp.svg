@@ -1,0 +1,16 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 200'>
+<defs>
+<linearGradient id='nlpGrad' x1='0' y1='0' x2='1' y2='1'>
+<stop offset='0%' stop-color='#0EA5E9'/>
+<stop offset='50%' stop-color='#6366F1'/>
+<stop offset='100%' stop-color='#9333EA'/>
+</linearGradient>
+</defs>
+<rect width='320' height='200' rx='16' fill='url(#nlpGrad)'/>
+<g fill='none' stroke='white' stroke-width='2' stroke-linecap='round' opacity='0.95'>
+<path d='M70 50h140v40H110l-40 40V50z'/>
+<path d='M190 120h60v30h-40l-20 20v-50z' opacity='0.8'/>
+<path d='M85 65h110M85 80h80M85 95h60' stroke-width='3'/>
+</g>
+<text x='50%' y='180' text-anchor='middle' font-family='Inter' font-size='26' fill='#FFF' font-weight='600'>NLP</text>
+</svg>

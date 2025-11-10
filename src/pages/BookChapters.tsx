@@ -5,6 +5,7 @@ import { ArrowLeft, BookOpen } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import CursorTrail from "@/components/CursorTrail";
+import NeonBackground from "@/components/NeonBackground";
 import { useState } from "react";
 import {
   Dialog,
@@ -14,6 +15,10 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import bookChapterIcon from "@/assets/bookchapter-icon.jpg";
+import qkdAv from "@/assets/placeholders/dark/qkd-av.svg";
+import healthcare50 from "@/assets/placeholders/dark/healthcare-50.svg";
+import aiGovernance from "@/assets/placeholders/dark/ai-governance-alt.svg";
+import patternGeneric from "@/assets/placeholders/dark/pattern-generic.svg";
 
 const BookChapters = () => {
   const [selectedChapter, setSelectedChapter] = useState<number | null>(null);
@@ -24,23 +29,34 @@ const BookChapters = () => {
       publisher: "Nova Publishers",
       status: "Accepted",
       description: "Explained QKD fundamentals and secure communication in autonomous systems.",
-      fullSummary: "This chapter provides a comprehensive overview of Quantum Key Distribution (QKD) technology and its applications in securing autonomous vehicle communications. The work explores the theoretical foundations of quantum cryptography, implementation challenges, and practical use cases in modern transportation systems. Key topics include BB84 protocol, quantum channel security, and integration with existing automotive security frameworks."
+      fullSummary: "Comprehensive overview of QKD technology for autonomous vehicle communication security including protocols and integration challenges.",
+      image: qkdAv
     },
     {
       title: "Introduction to Healthcare 5.0",
       publisher: "Nova Publishers",
       status: "Accepted",
       description: "Discussed AI-driven healthcare ecosystems integrating IoT, ML, and blockchain.",
-      fullSummary: "This chapter introduces the concept of Healthcare 5.0, exploring how artificial intelligence, Internet of Things (IoT), machine learning, and blockchain technology converge to create next-generation healthcare systems. The work examines intelligent patient monitoring, predictive diagnostics, secure health records management, and the ethical implications of AI-driven medical decision-making."
+      fullSummary: "Healthcare 5.0 convergence of IoT, ML, blockchain enabling predictive diagnostics, secure records, and ethical AI workflows.",
+      image: healthcare50
+    },
+    {
+      title: "Human Centricity in AI Governance – Use Cases, Challenges and Research Directions",
+      publisher: "(Pending)",
+      status: "In Preparation",
+      description: "Explores human-centered frameworks ensuring ethical oversight and transparency in AI governance.",
+      fullSummary: "Survey of human-centric AI governance emphasizing transparency, accountability, participatory oversight, and research directions.",
+      image: aiGovernance
     }
   ];
 
   return (
     <div className="min-h-screen bg-background text-foreground relative">
+      <NeonBackground />
       <CursorTrail />
       <Navigation />
       
-      <div className="container mx-auto px-4 py-24">
+  <div className="container mx-auto px-4 py-24 page-safe-top">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -59,7 +75,7 @@ const BookChapters = () => {
               <img src={bookChapterIcon} alt="Book Chapters" className="w-full h-48 object-cover opacity-80" />
             </div>
           </div>
-          <h1 className="text-5xl md:text-6xl font-bold mb-4 gradient-text text-center">
+          <h1 className="text-5xl md:text-6xl font-bold mb-4 gradient-text text-center page-title">
             Book Chapters
           </h1>
           <p className="text-xl text-muted-foreground mb-8 text-center max-w-3xl mx-auto">
@@ -67,7 +83,7 @@ const BookChapters = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
           {bookChapters.map((chapter, index) => (
             <motion.div
               key={index}
@@ -81,6 +97,9 @@ const BookChapters = () => {
                 onClick={() => setSelectedChapter(index)}
               >
                 <CardHeader>
+                  <div className="mb-4 rounded-md overflow-hidden h-36 w-full ring-2 ring-accent/40">
+                    <img src={chapter.image || patternGeneric} alt={chapter.title} className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLImageElement).src = patternGeneric; }} />
+                  </div>
                   <div className="flex items-center gap-2 mb-3">
                     <span className="px-3 py-1 bg-gold/20 text-gold rounded-full text-xs border border-gold/30">
                       {chapter.publisher}
