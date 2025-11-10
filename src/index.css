@@ -6,61 +6,59 @@
 All colors MUST be HSL.
 */
 
-@layer base {
   :root {
-    --background: 240 20% 4%;
-    --foreground: 270 15% 96%;
+    --background: 220 25% 8%;
+    --foreground: 210 20% 92%;
 
-    --card: 240 25% 8%;
-    --card-foreground: 270 15% 96%;
+    --card: 220 20% 12%;
+    --card-foreground: 210 20% 92%;
 
-    --popover: 240 25% 8%;
-    --popover-foreground: 270 15% 96%;
+    --popover: 220 20% 12%;
+    --popover-foreground: 210 20% 92%;
 
-    --primary: 270 100% 70%;
-    --primary-foreground: 270 10% 98%;
+    --primary: 220 80% 75%;
+    --primary-foreground: 220 20% 10%;
 
-    --secondary: 180 100% 55%;
-    --secondary-foreground: 180 10% 98%;
+    --secondary: 270 70% 80%;
+    --secondary-foreground: 270 20% 10%;
 
-    --muted: 240 15% 18%;
-    --muted-foreground: 270 15% 75%;
+    --muted: 220 15% 20%;
+    --muted-foreground: 210 15% 65%;
 
-    --accent: 270 95% 78%;
-    --accent-foreground: 270 10% 10%;
+    --accent: 260 60% 75%;
+    --accent-foreground: 260 20% 10%;
 
-    --gold: 45 100% 75%;
-    --gold-foreground: 45 10% 10%;
+    --gold: 45 85% 80%;
+    --gold-foreground: 45 20% 10%;
 
-    --destructive: 0 84% 60%;
+    --destructive: 0 70% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 240 15% 25%;
-    --input: 240 15% 25%;
-    --ring: 270 100% 70%;
+    --border: 220 20% 25%;
+    --input: 220 20% 25%;
+    --ring: 220 80% 75%;
 
     --radius: 0.75rem;
 
-    --glass-bg: 240 25% 8% / 0.4;
-    --glass-border: 270 100% 70% / 0.2;
+    --glass-bg: 220 20% 12% / 0.5;
+    --glass-border: 220 80% 75% / 0.3;
 
-    --gradient-primary: linear-gradient(135deg, hsl(270 100% 70%), hsl(180 100% 55%), hsl(45 100% 75%));
-    --gradient-glow: linear-gradient(135deg, hsl(270 100% 70% / 0.4), hsl(180 100% 55% / 0.4));
-    --glow-primary: 0 0 30px hsl(270 100% 70% / 0.6), 0 0 60px hsl(180 100% 55% / 0.3);
-    --glow-secondary: 0 0 30px hsl(180 100% 55% / 0.5);
-    --glow-gold: 0 0 20px hsl(45 100% 75% / 0.5);
+    --gradient-primary: linear-gradient(135deg, hsl(220 80% 75%), hsl(270 70% 80%));
+    --gradient-glow: linear-gradient(135deg, hsl(220 80% 75% / 0.3), hsl(270 70% 80% / 0.3));
+    --glow-primary: 0 0 25px hsl(220 80% 75% / 0.5), 0 0 50px hsl(270 70% 80% / 0.3);
+    --glow-secondary: 0 0 25px hsl(270 70% 80% / 0.4);
+    --glow-gold: 0 0 20px hsl(45 85% 80% / 0.4);
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
-    --sidebar-background: 240 20% 4%;
-    --sidebar-foreground: 270 15% 96%;
-    --sidebar-primary: 270 100% 70%;
-    --sidebar-primary-foreground: 270 10% 98%;
-    --sidebar-accent: 240 25% 8%;
-    --sidebar-accent-foreground: 270 15% 96%;
-    --sidebar-border: 240 15% 25%;
-    --sidebar-ring: 270 100% 70%;
+    --sidebar-background: 220 25% 8%;
+    --sidebar-foreground: 210 20% 92%;
+    --sidebar-primary: 220 80% 75%;
+    --sidebar-primary-foreground: 220 20% 10%;
+    --sidebar-accent: 220 20% 12%;
+    --sidebar-accent-foreground: 210 20% 92%;
+    --sidebar-border: 220 20% 25%;
+    --sidebar-ring: 220 80% 75%;
   }
-}
 
 @layer base {
   * {
@@ -110,10 +108,29 @@ All colors MUST be HSL.
   }
 
   .glass-card {
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    background: hsl(var(--glass-bg));
+    backdrop-filter: blur(30px);
+    border: 1px solid hsl(var(--glass-border));
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 hsl(220 80% 75% / 0.1);
+  }
+
+  .glassmorphic-initials {
+    background: hsl(var(--glass-bg));
+    backdrop-filter: blur(40px);
+    border: 2px solid hsl(var(--glass-border));
+    box-shadow: inset 0 0 40px hsl(220 80% 75% / 0.2);
+  }
+
+  .neon-cursor {
+    pointer-events: none;
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: radial-gradient(circle, hsl(220 80% 75% / 0.6), transparent);
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    transition: width 0.2s, height 0.2s;
   }
 
   .gold-accent {

@@ -1,99 +1,108 @@
 import { motion } from "framer-motion";
-import { ArrowLeft, Sparkles } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { useNavigate } from "react-router-dom";
-import projectsBg from "@/assets/projects-bg.jpg";
+import { ArrowLeft } from "lucide-react";
+import { Link } from "react-router-dom";
+import Navigation from "@/components/Navigation";
+import CursorTrail from "@/components/CursorTrail";
 
 const Projects = () => {
-  const navigate = useNavigate();
-
   const projects = [
     {
       title: "GAN-Based Synthetic Data Augmentation for Rare Disease Imaging",
-      description: "Built custom GAN models to generate synthetic MRI images for underrepresented diseases, addressing critical data scarcity in medical AI research."
+      description: "Built custom GAN models to generate synthetic MRI images for underrepresented diseases, addressing critical data scarcity in medical AI research.",
+      tech: ["GANs", "TensorFlow", "Medical Imaging"]
     },
     {
       title: "Machine Learning-Based Stroke Prediction Model",
-      description: "Developed a predictive healthcare model using medical and demographic data to identify high-risk patients for early intervention."
+      description: "Developed a predictive healthcare model using medical and demographic data to identify high-risk patients for early intervention.",
+      tech: ["Machine Learning", "Healthcare", "Python"]
     },
     {
       title: "Semantic-Aware Book Recommendation Framework",
-      description: "Designed an AI-based recommendation system using semantic embeddings and natural language processing for personalized book suggestions."
+      description: "Designed an AI-based recommendation system using semantic embeddings and natural language processing for personalized book suggestions.",
+      tech: ["NLP", "Recommendation System", "Embeddings"]
     },
     {
       title: "Sentiment Modeling of IMDB Reviews",
-      description: "Built deep learning models (LSTMs, TF-IDF) for sentiment classification achieving high accuracy on large-scale movie review datasets."
+      description: "Built deep learning models (LSTMs, TF-IDF) for sentiment classification achieving high accuracy on large-scale movie review datasets.",
+      tech: ["LSTM", "NLP", "TF-IDF"]
     },
     {
       title: "Predictive Modeling of Customer Churn",
-      description: "Used Logistic Regression, XGBoost, and SHAP analysis to identify key retention drivers and predict customer churn behavior."
+      description: "Used Logistic Regression, XGBoost, and SHAP analysis to identify key retention drivers and predict customer churn behavior.",
+      tech: ["XGBoost", "SHAP", "Analytics"]
+    },
+    {
+      title: "Resume Evaluation using NLP",
+      description: "Created an automated resume screening system using natural language processing to match candidates with job requirements.",
+      tech: ["NLP", "Text Analysis", "Automation"]
     }
   ];
 
   return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative min-h-[40vh] flex items-center justify-center overflow-hidden">
-        <div 
-          className="absolute inset-0 z-0"
-          style={{
-            backgroundImage: `url(${projectsBg})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            filter: 'brightness(0.3)'
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/80 to-background z-0" />
-        
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
+    <div className="min-h-screen bg-background text-foreground relative">
+      <CursorTrail />
+      <Navigation />
+      
+      <div className="container mx-auto px-4 py-24">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="container mx-auto px-4 relative z-10 text-center"
+          transition={{ duration: 0.6 }}
+          className="mb-12"
         >
-          <Button
-            variant="outline"
-            size="lg"
-            onClick={() => navigate('/')}
-            className="absolute left-4 top-4 border-primary text-primary hover:bg-primary/10"
-          >
-            <ArrowLeft className="mr-2 h-5 w-5" />
-            Back to Home
-          </Button>
+          <Link to="/">
+            <Button variant="ghost" className="glass-card hover:glow-border mb-8">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Back to Home
+            </Button>
+          </Link>
 
-          <Sparkles className="h-16 w-16 text-secondary mx-auto mb-4" />
-          <h1 className="text-5xl md:text-7xl font-bold mb-4 gradient-text">
+          <h1 className="text-5xl md:text-6xl font-bold mb-4 gradient-text text-center">
             Projects
           </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground mb-8 text-center max-w-3xl mx-auto">
             Innovative AI/ML solutions bridging research and real-world applications
           </p>
         </motion.div>
-      </section>
 
-      {/* Projects Content */}
-      <section className="py-20 px-4 bg-background">
-        <div className="container mx-auto max-w-6xl">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.map((project, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1, duration: 0.6 }}
-                viewport={{ once: true }}
-              >
-                <Card className="p-6 h-full glass-card hover-glow transition-all duration-300">
-                  <Sparkles className="h-8 w-8 text-primary mb-4" />
-                  <h3 className="text-lg font-bold mb-3 text-foreground">{project.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{project.description}</p>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+          {projects.map((project, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              whileHover={{ y: -8, scale: 1.02 }}
+            >
+              <Card className="glass-card hover:glow-border h-full border-2 transition-all duration-300">
+                <CardHeader>
+                  <CardTitle className="text-xl gradient-text">
+                    {project.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground mb-4 leading-relaxed text-sm">
+                    {project.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tech.map((tech, techIndex) => (
+                      <span
+                        key={techIndex}
+                        className="px-3 py-1 bg-primary/20 text-primary rounded-full text-xs"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
         </div>
-      </section>
+      </div>
     </div>
   );
 };
