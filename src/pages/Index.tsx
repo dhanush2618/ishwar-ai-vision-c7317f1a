@@ -78,30 +78,11 @@ const Index = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-wrap justify-center gap-4 text-sm text-muted-foreground mb-12"
-          >
-            <span className="px-4 py-2 glass-card rounded-full">
-              Research Intern – NIT Silchar
-            </span>
-            <span className="px-4 py-2 glass-card rounded-full">
-              10+ Publications
-            </span>
-            <span className="px-4 py-2 glass-card rounded-full">
-              Multiple Book Chapters
-            </span>
-            <span className="px-4 py-2 glass-card rounded-full">
-              GANs | Computer Vision
-            </span>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
             className="flex flex-wrap justify-center gap-4"
           >
             <Button
               onClick={scrollToContact}
+              size="lg"
               className="glass-card hover:glow-border px-8 py-6 text-lg"
             >
               Let's Connect
@@ -327,21 +308,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Floating Collaborate Banner */}
-      <motion.div
-        initial={{ opacity: 0, y: 100 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 1 }}
-        className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-40"
-      >
-        <Button
-          onClick={scrollToContact}
-          size="lg"
-          className="glass-card hover:glow-border animate-glow-pulse px-8 py-6 text-lg shadow-2xl"
-        >
-          Let's Collaborate
-        </Button>
-      </motion.div>
     </div>
   );
 };

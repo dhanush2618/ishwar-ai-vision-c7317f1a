@@ -13,6 +13,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import bookChapterIcon from "@/assets/bookchapter-icon.jpg";
 
 const BookChapters = () => {
   const [selectedChapter, setSelectedChapter] = useState<number | null>(null);
@@ -21,14 +22,14 @@ const BookChapters = () => {
     {
       title: "Quantum Key Distribution (QKD) – Theory and Applications in AV Security",
       publisher: "Nova Publishers",
-      status: "Published",
+      status: "Accepted",
       description: "Explained QKD fundamentals and secure communication in autonomous systems.",
       fullSummary: "This chapter provides a comprehensive overview of Quantum Key Distribution (QKD) technology and its applications in securing autonomous vehicle communications. The work explores the theoretical foundations of quantum cryptography, implementation challenges, and practical use cases in modern transportation systems. Key topics include BB84 protocol, quantum channel security, and integration with existing automotive security frameworks."
     },
     {
       title: "Introduction to Healthcare 5.0",
       publisher: "Nova Publishers",
-      status: "Published",
+      status: "Accepted",
       description: "Discussed AI-driven healthcare ecosystems integrating IoT, ML, and blockchain.",
       fullSummary: "This chapter introduces the concept of Healthcare 5.0, exploring how artificial intelligence, Internet of Things (IoT), machine learning, and blockchain technology converge to create next-generation healthcare systems. The work examines intelligent patient monitoring, predictive diagnostics, secure health records management, and the ethical implications of AI-driven medical decision-making."
     }
@@ -54,7 +55,9 @@ const BookChapters = () => {
           </Link>
 
           <div className="flex justify-center mb-8">
-            <BookOpen className="w-16 h-16 text-gold" />
+            <div className="rounded-lg overflow-hidden max-w-3xl">
+              <img src={bookChapterIcon} alt="Book Chapters" className="w-full h-48 object-cover opacity-80" />
+            </div>
           </div>
           <h1 className="text-5xl md:text-6xl font-bold mb-4 gradient-text text-center">
             Book Chapters

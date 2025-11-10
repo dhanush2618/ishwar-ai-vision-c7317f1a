@@ -5,6 +5,7 @@ import { ArrowLeft, Award, Trophy } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import CursorTrail from "@/components/CursorTrail";
+import achievementsIcon from "@/assets/achievements-icon.jpg";
 
 const Achievements = () => {
   const achievements = [
@@ -48,7 +49,9 @@ const Achievements = () => {
           </Link>
 
           <div className="flex justify-center mb-8">
-            <Award className="w-16 h-16 text-gold" />
+            <div className="rounded-lg overflow-hidden max-w-3xl">
+              <img src={achievementsIcon} alt="Achievements" className="w-full h-48 object-cover opacity-80" />
+            </div>
           </div>
           <h1 className="text-5xl md:text-6xl font-bold mb-4 gradient-text text-center">
             Achievements & Awards

@@ -5,6 +5,7 @@ import { ArrowLeft, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import CursorTrail from "@/components/CursorTrail";
+import publicationsIcon from "@/assets/publications-icon.jpg";
 
 const Publications = () => {
   const ieeeLink = "https://ieeexplore.ieee.org/search/searchresult.jsp?newsearch=true&queryText=dhanush%20ishwar";
@@ -73,6 +74,9 @@ const Publications = () => {
             </Button>
           </Link>
 
+          <div className="mb-8 rounded-lg overflow-hidden max-w-3xl mx-auto">
+            <img src={publicationsIcon} alt="Publications" className="w-full h-48 object-cover opacity-80" />
+          </div>
           <h1 className="text-5xl md:text-6xl font-bold mb-4 gradient-text text-center">
             Publications
           </h1>
