@@ -6,7 +6,7 @@ import { ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const LinkedIn = () => {
-  const profileUrl = "https://www.linkedin.com/feed/"; // user provided account URL
+  const profileUrl = "https://www.linkedin.com/in/dhanush-ishwar-81a267258/";
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden relative">

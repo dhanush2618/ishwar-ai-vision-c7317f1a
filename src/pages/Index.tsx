@@ -8,11 +8,13 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { useState } from "react";
-import { svgThumbByIndex } from "@/lib/thumb";
-import robot from "@/assets/placeholders/dark/robot.svg";
 import homeBg from "@/assets/placeholders/dark/home-bg.svg";
 import aboutBg from "@/assets/placeholders/dark/about-graph.svg";
 import educationBg from "@/assets/placeholders/dark/education-diagram.svg";
+// Removed robot image in favor of abstract hero design
+
+// Debug build tag to verify refreshes visually in the hero (will be removed)
+const BUILD_TAG = "build-2025-11-11-02";
 
 const Index = () => {
   const [formData, setFormData] = useState({
@@ -20,6 +22,9 @@ const Index = () => {
     email: "",
     message: "",
   });
+  const [mouse, setMouse] = useState({ x: 0, y: 0 });
+  // Restore decorations for abstract design
+  const SHOW_DECOR = true;
 
   const skills = [
     "Machine Learning",
@@ -46,183 +51,236 @@ const Index = () => {
     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
   };
 
-  // Removed highlights per user request
-
+  // Surface a console stamp as another cache-busting indicator
+  console.log("Portfolio loaded:", BUILD_TAG);
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden relative">
-      <img src={homeBg} alt="AI Neon Background" className="pointer-events-none select-none fixed inset-0 w-full h-full object-cover -z-20 opacity-90" />
-      {/* Decorative gradient blobs */}
-      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute w-[50rem] h-[50rem] bg-gradient-to-tr from-primary/20 via-accent/20 to-secondary/10 rounded-full blur-3xl top-[-20rem] left-[-10rem] animate-pulse" />
-        <div className="absolute w-[40rem] h-[40rem] bg-gradient-to-br from-secondary/20 via-primary/10 to-accent/20 rounded-full blur-3xl bottom-[-15rem] right-[-5rem] animate-pulse" />
-      </div>
       <CursorTrail />
       <Navigation />
 
-    {/* Hero Section with aesthetic AI background */}
-  <section className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden z-10">
+      {/* Hero Section - Minimal, clean */}
+      <section
+        className="relative min-h-[88vh] flex items-center justify-center px-6 pt-32 md:pt-40 overflow-hidden"
+        onMouseMove={(e) => {
+          const { innerWidth, innerHeight } = window;
+          const x = e.clientX / innerWidth - 0.5;
+          const y = e.clientY / innerHeight - 0.5;
+          setMouse({ x, y });
+        }}
+      >
+        {/* Debug banners removed */}
         <div className="absolute inset-0 -z-10">
-          {/* Ensure explicit hero background image */}
-          <img src={homeBg} alt="Hero Background" className="absolute inset-0 w-full h-full object-cover opacity-70" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(99,102,241,0.25),transparent_60%)]" />
-          <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(56,189,248,0.18),transparent_40%,rgba(167,139,250,0.25))] mix-blend-screen" />
-          <svg className="absolute w-[140%] h-[140%] -left-[20%] -top-[20%] opacity-30" viewBox="0 0 800 800">
-            <defs>
-              <linearGradient id="gridGrad" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stopColor="#6366F1" />
-                <stop offset="50%" stopColor="#8B5CF6" />
-                <stop offset="100%" stopColor="#06B6D4" />
-              </linearGradient>
-            </defs>
-            {Array.from({ length: 40 }).map((_, i) => (
-              <line key={`v-${i}`} x1={i*20} y1={0} x2={i*20} y2={800} stroke="url(#gridGrad)" strokeWidth="0.5" strokeOpacity="0.35" />
-            ))}
-            {Array.from({ length: 40 }).map((_, i) => (
-              <line key={`h-${i}`} x1={0} y1={i*20} x2={800} y2={i*20} stroke="url(#gridGrad)" strokeWidth="0.5" strokeOpacity="0.35" />
-            ))}
-            <circle cx="400" cy="400" r="180" fill="none" stroke="#10B981" strokeOpacity="0.25" strokeWidth="2" />
-            <circle cx="400" cy="400" r="260" fill="none" stroke="#6366F1" strokeOpacity="0.18" strokeWidth="2" />
-            <circle cx="400" cy="400" r="330" fill="none" stroke="#8B5CF6" strokeOpacity="0.12" strokeWidth="2" />
-            <path d="M250 500 Q400 300 550 500" fill="none" stroke="#F59E0B" strokeOpacity="0.3" strokeWidth="2" />
-            <path d="M250 300 Q400 520 550 300" fill="none" stroke="#F43F5E" strokeOpacity="0.25" strokeWidth="2" />
-          </svg>
-          <div className="absolute inset-0 backdrop-blur-[1px]" />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <img src={robot} alt="AI Robot" className="w-[820px] max-w-none opacity-30" />
+          <img src={homeBg} alt="Background" className="w-full h-full object-cover opacity-35" />
+          <div className="mesh-bg" />
+          {/* Balanced vignette after confirmation */}
+          <div className="absolute inset-0" style={{
+            background: "radial-gradient(circle at 50% 50%, rgba(2,6,23,0.14) 0%, rgba(2,6,23,0.26) 42%, rgba(2,6,23,0.6) 78%, rgba(2,6,23,0.9) 100%)"
+          }} />
+          <div className="absolute inset-0" style={{ transform: `translate(${mouse.x * 10}px, ${mouse.y * 6}px)` }}>
+            <svg viewBox="0 0 1200 800" className="w-full h-full opacity-10">
+              {Array.from({ length: 42 }).map((_, i) => (
+                <line key={`v-${i}`} x1={i * 30} y1={0} x2={i * 30} y2={800} stroke="#64748B" strokeWidth="0.4" />
+              ))}
+              {Array.from({ length: 28 }).map((_, i) => (
+                <line key={`h-${i}`} x1={0} y1={i * 28} x2={1200} y2={i * 28} stroke="#475569" strokeWidth="0.35" />
+              ))}
+            </svg>
           </div>
-          {/* electrifying arcs overlay */}
-          <svg className="absolute inset-0 w-full h-full opacity-80" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <defs>
-              <filter id="glow">
-                <feGaussianBlur stdDeviation="1.5" result="coloredBlur" />
-                <feMerge>
-                  <feMergeNode in="coloredBlur" />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
-              </filter>
-            </defs>
-            {/* cyan arc */}
-            <path d="M5 70 C 25 40, 75 60, 95 30" stroke="#22D3EE" strokeWidth="0.6" fill="none" className="electric-path" style={{ filter: "url(#glow)" }} />
-            {/* violet arc */}
-            <path d="M5 55 C 30 85, 70 25, 95 45" stroke="#A78BFA" strokeWidth="0.5" fill="none" className="electric-path" style={{ filter: "url(#glow)" }} />
-            {/* amber spark */}
-            <path d="M10 35 C 30 50, 60 50, 90 35" stroke="#F59E0B" strokeWidth="0.4" fill="none" className="electric-path" style={{ filter: "url(#glow)" }} />
-          </svg>
-        </div>
+          {/* Abstract geometric centerpiece */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none" style={{ transform: `translate(${mouse.x * 4}px, ${mouse.y * 2}px)` }}>
+            <svg viewBox="0 0 800 800" className="w-[900px] h-[900px] opacity-35">
+              <defs>
+                <radialGradient id="g1" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.45" />
+                  <stop offset="60%" stopColor="#6366f1" stopOpacity="0.25" />
+                  <stop offset="100%" stopColor="#0b1020" stopOpacity="0" />
+                </radialGradient>
+                <linearGradient id="strokeGrad" x1="0" x2="1" y1="0" y2="1">
+                  <stop offset="0%" stopColor="#22d3ee" />
+                  <stop offset="100%" stopColor="#a78bfa" />
+                </linearGradient>
+              </defs>
+              <circle cx="400" cy="400" r="280" fill="url(#g1)" />
+              <g fill="none" stroke="url(#strokeGrad)" opacity="0.5">
+                <circle cx="400" cy="400" r="240" strokeWidth="1.5" />
+                <circle cx="400" cy="400" r="200" strokeWidth="1.2" />
+                <circle cx="400" cy="400" r="160" strokeWidth="1.0" />
+              </g>
+              <g opacity="0.35">
+                {Array.from({ length: 18 }).map((_, i) => (
+                  <line key={i} x1={400} y1={400} x2={400 + 280 * Math.cos((i * Math.PI) / 9)} y2={400 + 280 * Math.sin((i * Math.PI) / 9)} stroke="#22d3ee" strokeOpacity="0.35" strokeWidth="0.8" />
+                ))}
+              </g>
+            </svg>
+          </div>
+          {/* sweeping light beam */}
+          {SHOW_DECOR && <div className="absolute inset-0 beam-sweep mix-blend-screen opacity-15 md:opacity-25" />}
+          {/* tasteful electric arcs */}
+          {SHOW_DECOR && (
+            <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-30 md:opacity-45" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <defs>
+                <filter id="softGlow">
+                  <feGaussianBlur stdDeviation="1.2" result="blur" />
+                  <feMerge>
+                    <feMergeNode in="blur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+              </defs>
+              <path d="M2 65 C 24 40, 76 60, 98 35" stroke="#22D3EE" strokeWidth="0.6" fill="none" className="electric-path" style={{ filter: "url(#softGlow)" }} />
+              <path d="M4 48 C 30 78, 70 22, 96 44" stroke="#A78BFA" strokeWidth="0.5" fill="none" className="electric-path" style={{ filter: "url(#softGlow)" }} />
+              <path d="M8 32 C 28 46, 62 46, 92 32" stroke="#F59E0B" strokeWidth="0.4" fill="none" className="electric-path" style={{ filter: "url(#softGlow)" }} />
+            </svg>
+          )}
+          {/* particles */}
+          {SHOW_DECOR && Array.from({ length: 28 }).map((_, i) => (
+            <div
+              key={i}
+              className="particle"
+              style={{
+                left: `${(i * 37) % 100}%`,
+                top: `${(i * 53) % 100}%`,
+                animationDelay: `${i * 0.35}s`,
+                animationDuration: `${5 + (i % 5)}s`
+              }}
+            />
+          ))}
 
-        <div className="relative z-10 text-center max-w-4xl mx-auto">
-          {/* halo behind heading */}
-          <div className="pointer-events-none absolute left-1/2 -translate-x-1/2 -top-10 w-[680px] h-[680px] rounded-full opacity-50 blur-3xl" style={{ backgroundImage: "conic-gradient(from 120deg at 50% 50%, rgba(34,211,238,0.25), rgba(167,139,250,0.25), rgba(99,102,241,0.25), rgba(52,211,153,0.2))" }} />
-          {/* pulsing ring */}
-          <div className="absolute left-1/2 -translate-x-1/2 -top-4 w-[560px] h-[560px] rounded-full pulse-ring" />
+          {/* orbiting dots */}
+          {SHOW_DECOR && (
+            <>
+              <div className="orbit thin animate" style={{ width: 520, height: 520 }}>
+                <div className="orbit-dot cyan" />
+              </div>
+              <div className="orbit thin animate" style={{ width: 360, height: 360, animationDuration: '18s' }}>
+                <div className="orbit-dot violet" />
+              </div>
+            </>
+          )}
+        </div>
+        <div className="relative max-w-5xl mx-auto text-center" style={{ transform: `translate(${mouse.x * 6}px, ${mouse.y * 4}px)` }}>
+          {/* subtle glow behind heading (distinct color) */}
+          <div className="pointer-events-none absolute -inset-x-12 -top-10 -bottom-8 -z-10" style={{
+            background: "radial-gradient(60% 60% at 50% 40%, rgba(244,114,182,0.18) 0%, rgba(20,184,166,0.16) 35%, rgba(2,6,23,0) 70%)"
+          }} />
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-6xl md:text-8xl font-bold mb-6 gradient-text drop-shadow-[0_0_12px_rgba(34,211,238,0.55)]"
-            style={{ textShadow: "0 0 30px rgba(99,102,241,0.65), 0 0 80px rgba(34,211,238,0.55), 0 0 110px rgba(6,182,212,0.45)" }}
+            transition={{ duration: 0.8 }}
+            className="font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-300 via-violet-300 to-emerald-300 text-5xl md:text-7xl tracking-tight"
+            style={{ textShadow: "0 4px 24px rgba(0,0,0,0.55)" }}
           >
             Dhanush Ishwar
           </motion.h1>
-
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl md:text-2xl text-muted-foreground mb-8"
+            transition={{ duration: 0.8, delay: 0.15 }}
+            className="text-lg md:text-2xl text-slate-300 max-w-3xl mx-auto mb-8 leading-relaxed"
           >
-            Artificial Intelligence and Machine Learning Undergraduate
+            AI & ML Undergraduate focusing on human‑centric governance, multimodal intelligence, and practical deep learning applications in healthcare & education.
           </motion.p>
-
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
             className="flex flex-wrap justify-center gap-4"
           >
             <Button
               onClick={scrollToContact}
               size="lg"
-              className="glass-card hover:glow-border px-8 py-6 text-lg shadow-[0_0_20px_rgba(99,102,241,0.35)]"
+              className="px-8 py-6 text-lg rounded-xl bg-gradient-to-r from-cyan-600/60 to-indigo-600/60 hover:from-cyan-500 hover:to-indigo-500 backdrop-blur border border-cyan-300/20 hover:border-cyan-300/40 transition-colors"
             >
-              Let's Connect
+              Contact
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="px-8 py-6 text-lg rounded-xl border-slate-500/40 hover:border-cyan-300/50 backdrop-blur-sm"
+            >
+              <a href="https://www.linkedin.com/in/dhanush-ishwar-81a267258/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
             </Button>
           </motion.div>
         </div>
-
         <ScrollIndicator />
       </section>
-
-      {/* About + Skills + Languages merged */}
-      <section className="py-24 px-4 relative overflow-hidden">
-        <img src={aboutBg} alt="About background" className="pointer-events-none absolute inset-0 -z-10 w-full h-full object-cover opacity-25" />
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-start">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="space-y-6"
-            >
-              <div className="flex justify-center md:justify-start">
-                <div className="relative w-48 h-48 rounded-full ring-4 ring-primary/40 shadow-xl overflow-hidden">
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(99,102,241,0.5),transparent_40%)]" />
-                  <div className="absolute inset-0 bg-[conic-gradient(from_180deg_at_50%_50%,rgba(34,211,238,0.35),rgba(167,139,250,0.35),rgba(52,211,153,0.35))] animate-spin-slow" />
-                  <div className="absolute inset-0 backdrop-blur-[1px]" />
-                </div>
+    {/* About + Skills + Languages merged */}
+    <section className="py-24 px-4 relative overflow-hidden">
+      <img src={aboutBg} alt="About background" className="pointer-events-none absolute inset-0 -z-10 w-full h-full object-cover opacity-25" />
+      <div className="max-w-7xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-12 items-start">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="space-y-6"
+          >
+            <div className="flex justify-center md:justify-start">
+              <div className="relative w-48 h-48 rounded-full ring-4 ring-primary/40 shadow-xl overflow-hidden">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(99,102,241,0.5),transparent_40%)]" />
+                <div className="absolute inset-0 bg-[conic-gradient(from_180deg_at_50%_50%,rgba(34,211,238,0.35),rgba(167,139,250,0.35),rgba(52,211,153,0.35))] animate-spin-slow" />
+                <div className="absolute inset-0 backdrop-blur-[1px]" />
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold gradient-text">About Me</h2>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                AI & ML undergraduate focused on bridging deep learning, computer vision, NLP, and responsible AI to solve problems in healthcare, education & sustainability. I value explainability, human-centric governance, and building production-ready intelligent systems.
-              </p>
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div className="glass-card p-4 rounded-xl border hover:glow-border">
-                  <h4 className="font-semibold mb-1">Tamil</h4>
-                  <p className="text-xs text-muted-foreground">Mother Tongue • Native</p>
-                </div>
-                <div className="glass-card p-4 rounded-xl border hover:glow-border">
-                  <h4 className="font-semibold mb-1">English</h4>
-                  <p className="text-xs text-muted-foreground">Professional</p>
-                </div>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold gradient-text">About Me</h2>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              I’m <span className="font-semibold text-primary">Dhanush Ishwar</span>, an aspiring <span className="font-semibold text-accent">Artificial Intelligence and Data Science engineer</span> currently pursuing my <span className="font-semibold text-primary">B.Tech in Artificial Intelligence and Machine Learning</span> at <span className="font-semibold text-secondary">Rajalakshmi Engineering College</span> (affiliated with <span className="font-semibold text-secondary">Anna University, Chennai</span>). With a <span className="font-semibold text-gold">CGPA of 7.96</span> and a strong research-driven mindset, I’ve developed expertise across <span className="font-semibold text-primary">machine learning</span>, <span className="font-semibold text-primary">data analytics</span>, <span className="font-semibold text-primary">computer vision</span>, and <span className="font-semibold text-primary">AI-driven automation</span>.
+              <br /><br />
+              My academic journey includes <span className="font-semibold text-secondary">7+ IEEE research papers</span>, several <span className="font-semibold text-secondary">book chapter contributions</span>, and a <span className="font-semibold text-secondary">research internship at NIT Silchar</span> focused on <span className="font-semibold text-primary">AI in the medical domain</span>.
+              <br /><br />
+              I’ve also gained industrial exposure through an internship at <span className="font-semibold text-secondary">Hyundai Motors India (Sriperumbudur)</span>, where I worked on <span className="font-semibold text-primary">data analytics</span> and <span className="font-semibold text-primary">automation systems</span>, bridging the gap between <span className="font-semibold text-accent">AI</span> and real-world manufacturing. My academic projects and publications reflect my passion for exploring <span className="font-semibold text-accent">data-centric intelligence</span>, while my strong foundation in <span className="font-semibold text-primary">computer networks</span>, <span className="font-semibold text-primary">operating systems</span>, and <span className="font-semibold text-primary">deep learning</span> solidifies my technical versatility.
+              <br /><br />
+              I aim to pursue <span className="font-semibold text-accent">advanced studies abroad</span> to deepen my knowledge of <span className="font-semibold text-primary">intelligent systems</span> and contribute to the intersection of <span className="font-semibold text-primary">AI</span>, <span className="font-semibold text-primary">data</span>, and <span className="font-semibold text-primary">real-world impact</span>.
+            </p>
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div className="glass-card p-4 rounded-xl border hover:glow-border">
+                <h4 className="font-semibold mb-1">Tamil</h4>
+                <p className="text-xs text-muted-foreground">Mother Tongue • Native</p>
               </div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="space-y-6"
-            >
-              <h3 className="text-3xl font-bold gradient-text">Core Skills</h3>
-              <div className="flex flex-wrap gap-3">
-                {skills.map((skill, index) => (
-                  <motion.span
-                    key={skill}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.03 }}
-                    whileHover={{ scale: 1.07 }}
-                    className="px-4 py-2 rounded-full text-xs font-medium bg-gradient-to-r from-primary/30 via-accent/30 to-secondary/30 backdrop-blur-sm border border-primary/20 hover:border-primary/50"
-                  >
-                    {skill}
-                  </motion.span>
-                ))}
+              <div className="glass-card p-4 rounded-xl border hover:glow-border">
+                <h4 className="font-semibold mb-1">English</h4>
+                <p className="text-xs text-muted-foreground">Professional</p>
               </div>
-              <div className="glass-card p-6 rounded-xl border-2">
-                <h4 className="text-xl font-semibold mb-2">Focus Areas (2025)</h4>
-                <ul className="space-y-1 text-sm text-muted-foreground list-disc list-inside">
-                  <li>Human-centric AI governance & ethical oversight</li>
-                  <li>Generative models for scarce medical imaging</li>
-                  <li>Multimodal emotion & mental health analytics</li>
-                  <li>Skill intelligence & semantic talent matching</li>
-                </ul>
-              </div>
-            </motion.div>
-          </div>
+            </div>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="space-y-6"
+          >
+            <h3 className="text-3xl font-bold gradient-text">Core Skills</h3>
+            <div className="flex flex-wrap gap-3">
+              {skills.map((skill, index) => (
+                <motion.span
+                  key={skill}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.03 }}
+                  whileHover={{ scale: 1.07 }}
+                  className="px-4 py-2 rounded-full text-xs font-medium bg-gradient-to-r from-primary/30 via-accent/30 to-secondary/30 backdrop-blur-sm border border-primary/20 hover:border-primary/50"
+                >
+                  {skill}
+                </motion.span>
+              ))}
+            </div>
+            <div className="glass-card p-6 rounded-xl border-2">
+              <h4 className="text-xl font-semibold mb-2">Focus Areas (2025)</h4>
+              <ul className="space-y-1 text-sm text-muted-foreground list-disc list-inside">
+                <li>Human-centric AI governance & ethical oversight</li>
+                <li>Generative models for scarce medical imaging</li>
+                <li>Multimodal emotion & mental health analytics</li>
+                <li>Skill intelligence & semantic talent matching</li>
+              </ul>
+            </div>
+          </motion.div>
         </div>
-      </section>
+      </div>
+    </section>
 
 
       {/* Education Section (solo after removing highlights) */}
@@ -356,7 +414,7 @@ const Index = () => {
                     asChild
                   >
                     <a
-                      href="https://www.linkedin.com/in/dhanush-ishwar-a07a35254/"
+                      href="https://www.linkedin.com/in/dhanush-ishwar-81a267258/"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
