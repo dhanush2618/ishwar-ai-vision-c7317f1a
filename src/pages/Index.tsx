@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import CursorTrail from "@/components/CursorTrail";
+import InteractiveHeroBg from "@/components/InteractiveHeroBg";
 import ScrollIndicator from "@/components/ScrollIndicator";
 import { Mail, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -72,91 +73,14 @@ const Index = () => {
         <div className="absolute inset-0 -z-10">
           <img src={homeBg} alt="Background" className="w-full h-full object-cover opacity-35" />
           <div className="mesh-bg" />
-          {/* Balanced vignette after confirmation */}
+          {/* Subtle vignette */}
           <div className="absolute inset-0" style={{
-            background: "radial-gradient(circle at 50% 50%, rgba(2,6,23,0.14) 0%, rgba(2,6,23,0.26) 42%, rgba(2,6,23,0.6) 78%, rgba(2,6,23,0.9) 100%)"
+            background: "radial-gradient(circle at 50% 50%, rgba(2,6,23,0.12) 0%, rgba(2,6,23,0.24) 42%, rgba(2,6,23,0.58) 78%, rgba(2,6,23,0.9) 100%)"
           }} />
-          <div className="absolute inset-0" style={{ transform: `translate(${mouse.x * 10}px, ${mouse.y * 6}px)` }}>
-            <svg viewBox="0 0 1200 800" className="w-full h-full opacity-10">
-              {Array.from({ length: 42 }).map((_, i) => (
-                <line key={`v-${i}`} x1={i * 30} y1={0} x2={i * 30} y2={800} stroke="#64748B" strokeWidth="0.4" />
-              ))}
-              {Array.from({ length: 28 }).map((_, i) => (
-                <line key={`h-${i}`} x1={0} y1={i * 28} x2={1200} y2={i * 28} stroke="#475569" strokeWidth="0.35" />
-              ))}
-            </svg>
-          </div>
-          {/* Abstract geometric centerpiece */}
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none" style={{ transform: `translate(${mouse.x * 4}px, ${mouse.y * 2}px)` }}>
-            <svg viewBox="0 0 800 800" className="w-[900px] h-[900px] opacity-35">
-              <defs>
-                <radialGradient id="g1" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.45" />
-                  <stop offset="60%" stopColor="#6366f1" stopOpacity="0.25" />
-                  <stop offset="100%" stopColor="#0b1020" stopOpacity="0" />
-                </radialGradient>
-                <linearGradient id="strokeGrad" x1="0" x2="1" y1="0" y2="1">
-                  <stop offset="0%" stopColor="#22d3ee" />
-                  <stop offset="100%" stopColor="#a78bfa" />
-                </linearGradient>
-              </defs>
-              <circle cx="400" cy="400" r="280" fill="url(#g1)" />
-              <g fill="none" stroke="url(#strokeGrad)" opacity="0.5">
-                <circle cx="400" cy="400" r="240" strokeWidth="1.5" />
-                <circle cx="400" cy="400" r="200" strokeWidth="1.2" />
-                <circle cx="400" cy="400" r="160" strokeWidth="1.0" />
-              </g>
-              <g opacity="0.35">
-                {Array.from({ length: 18 }).map((_, i) => (
-                  <line key={i} x1={400} y1={400} x2={400 + 280 * Math.cos((i * Math.PI) / 9)} y2={400 + 280 * Math.sin((i * Math.PI) / 9)} stroke="#22d3ee" strokeOpacity="0.35" strokeWidth="0.8" />
-                ))}
-              </g>
-            </svg>
-          </div>
-          {/* sweeping light beam */}
-          {SHOW_DECOR && <div className="absolute inset-0 beam-sweep mix-blend-screen opacity-15 md:opacity-25" />}
-          {/* tasteful electric arcs */}
-          {SHOW_DECOR && (
-            <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-30 md:opacity-45" viewBox="0 0 100 100" preserveAspectRatio="none">
-              <defs>
-                <filter id="softGlow">
-                  <feGaussianBlur stdDeviation="1.2" result="blur" />
-                  <feMerge>
-                    <feMergeNode in="blur" />
-                    <feMergeNode in="SourceGraphic" />
-                  </feMerge>
-                </filter>
-              </defs>
-              <path d="M2 65 C 24 40, 76 60, 98 35" stroke="#22D3EE" strokeWidth="0.6" fill="none" className="electric-path" style={{ filter: "url(#softGlow)" }} />
-              <path d="M4 48 C 30 78, 70 22, 96 44" stroke="#A78BFA" strokeWidth="0.5" fill="none" className="electric-path" style={{ filter: "url(#softGlow)" }} />
-              <path d="M8 32 C 28 46, 62 46, 92 32" stroke="#F59E0B" strokeWidth="0.4" fill="none" className="electric-path" style={{ filter: "url(#softGlow)" }} />
-            </svg>
-          )}
-          {/* particles */}
-          {SHOW_DECOR && Array.from({ length: 28 }).map((_, i) => (
-            <div
-              key={i}
-              className="particle"
-              style={{
-                left: `${(i * 37) % 100}%`,
-                top: `${(i * 53) % 100}%`,
-                animationDelay: `${i * 0.35}s`,
-                animationDuration: `${5 + (i % 5)}s`
-              }}
-            />
-          ))}
-
-          {/* orbiting dots */}
-          {SHOW_DECOR && (
-            <>
-              <div className="orbit thin animate" style={{ width: 520, height: 520 }}>
-                <div className="orbit-dot cyan" />
-              </div>
-              <div className="orbit thin animate" style={{ width: 360, height: 360, animationDuration: '18s' }}>
-                <div className="orbit-dot violet" />
-              </div>
-            </>
-          )}
+          {/* Interactive canvas background */}
+          <InteractiveHeroBg density={0.12} linkDistance={130} />
+          {/* Optional sweeping light beam */}
+          {SHOW_DECOR && <div className="absolute inset-0 beam-sweep mix-blend-screen opacity-10 md:opacity-20" />}
         </div>
         <div className="relative max-w-5xl mx-auto text-center" style={{ transform: `translate(${mouse.x * 6}px, ${mouse.y * 4}px)` }}>
           {/* subtle glow behind heading (distinct color) */}
